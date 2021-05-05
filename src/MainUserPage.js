@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import UserInfo from './UserInfo'
-import AddUser from './AddUser'
+//import AddUser from './AddUser'
 import styled from 'styled-components'
 
 //Below begin styled-components
@@ -106,7 +106,6 @@ function Users({setUserPage, setUserKey}) {
                             return <UserUi key={user.key} user={user.user} setUserPage={setUserPage} setUserKey={setUserKey} />
                         })}
                     </UsersDiv>
-                    <AddUser setUserPage={setUserPage}/>
                 </UsersWrapper>
         </>
     )

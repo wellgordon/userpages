@@ -76,7 +76,7 @@ function HomeUI({ content, setCount, count }) {
                     if(count < content.length - 1) {
                         setCount(count => count + 1)        
                     }   
-                }, 1000);              
+                }, 5000);              
             })   
 
     return (
