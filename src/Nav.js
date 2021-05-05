@@ -25,8 +25,8 @@ export const NavButton = styled.li`
 
 export default function Nav({setPage}) {
 
-    function handleClick() {
-        setPage('Home')
+    function handleClick(e) {
+        e.target.innerText === 'Home' ? setPage('Home') : setPage('About')
     }
 
     return (
@@ -35,7 +35,7 @@ export default function Nav({setPage}) {
             <NavButton onClick={handleClick}>
                 Home
             </NavButton>
-            <NavButton>
+            <NavButton onClick={handleClick}>
                 About
             </NavButton>    
         </NavList>

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
 import UserInfo from './UserInfo'
+import AddUser from './AddUser'
 import styled from 'styled-components'
 
+//Below begin styled-components
 
 const UsersWrapper = styled.div`
     height: 100vw;
@@ -24,6 +26,14 @@ const User = styled.section`
     flex-basis: 25%;
     box-shadow: 5px 5px 10px gray;
     margin: .5rem .5rem;
+    background-color: gray;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+    }
 
 `
 
@@ -47,6 +57,11 @@ const Button = styled.button`
     }
 `
 
+//End styled-components
+
+
+//Ui Components
+
 function UserUi({user, setUserPage, setUserKey}) {
     
     function handleClick() {
@@ -56,17 +71,16 @@ function UserUi({user, setUserPage, setUserKey}) {
 
     return (
         <>
-            <User>
-                <h1 onClick={handleClick}>{user.name.first}</h1>
-                <img src={user.picture.thumbnail} alt='user'></img>
+            <User onClick={handleClick}>
+                <h1>{user.name.first}</h1>
+                <img src={user.picture.large} alt='user'></img>
             </User>
            
         </>
     )
 }
 
-
-
+//Logic Components
 
 function Users({setUserPage, setUserKey}) {
     const [users, setUsers] = useState([])
@@ -92,11 +106,13 @@ function Users({setUserPage, setUserKey}) {
                             return <UserUi key={user.key} user={user.user} setUserPage={setUserPage} setUserKey={setUserKey} />
                         })}
                     </UsersDiv>
+                    <AddUser setUserPage={setUserPage}/>
                 </UsersWrapper>
         </>
     )
 }
 
+//Main export component
 function MainUserPage() {
 
     const [userPage, setUserPage] = useState('Users')
