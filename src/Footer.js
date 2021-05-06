@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Foot = styled.footer`
     position: relative;
-    bottom: 0;
+    bottom: 0%;
     left: 12.5%;
     width: 75%;
 `

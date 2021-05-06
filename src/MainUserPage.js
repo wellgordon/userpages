@@ -1,32 +1,35 @@
 import { useState } from 'react'
 import axios from 'axios'
 import UserInfo from './UserInfo'
-//import AddUser from './AddUser'
 import styled from 'styled-components'
 
 //Below begin styled-components
 
+
 const UsersWrapper = styled.div`
-    height: 100vw;
-    width: 50vw;
+    height: 100vh;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+`
+
+const Container = styled.div`
     display: flex;
     flex-flow: column;
     align-items: center;
 `
 
 const UsersDiv = styled.div`
-    position: relative;
-    width: 100%;
-    left: 50%;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 `
 
 const User = styled.section`
     flex-basis: 25%;
-    box-shadow: 5px 5px 10px gray;
+    box-shadow: 2px 2px 35px 10px rgba(153, 153, 153, .3);
     margin: .5rem .5rem;
-    background-color: gray;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -37,18 +40,11 @@ const User = styled.section`
 
 `
 
-const ButtonContainer = styled.div`
-    position: relative;
-    left: 50%;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-`
-
 const Button = styled.button`
     font-size: 100%;
     font-weight: bold;
     border: 0;
+    margin-bottom: 2rem;
     background-color: white;
     cursor: pointer;
 
@@ -84,29 +80,36 @@ function UserUi({user, setUserPage, setUserKey}) {
 
 function Users({setUserPage, setUserKey}) {
     const [users, setUsers] = useState([])
-    
+    const [count, setCount] = useState(0)
 
     function handleClick() {
-        axios.get('https://randomuser.me/api').then((res) => {
-            setUsers([...users, {key: res.data.results[0].name.first, user: res.data.results[0]}])
-            localStorage.setItem(`${res.data.results[0].name.first}`, JSON.stringify(res.data.results[0]))
-        })
+        if(count > 5) {
+            return
+        } else {
+            axios.get('https://randomuser.me/api').then((res) => {
+                setUsers([...users, {key: res.data.results[0].name.first, user: res.data.results[0]}])
+                localStorage.setItem(`${res.data.results[0].name.first}`, JSON.stringify(res.data.results[0]))
+            })
+            setCount(count + 1)
+
+        }
+        
     }
     
     return (
         <>
                 <UsersWrapper>
-                    <ButtonContainer>
+                    <Container>
                         <Button onClick={handleClick}>Add Another User!</Button>
-                    </ButtonContainer>
+                        <UsersDiv>
+                            
+                            {users.map((user) => {
+                                return <UserUi key={user.key} user={user.user} setUserPage={setUserPage} setUserKey={setUserKey} />
+                            })}
+                        </UsersDiv>
+                    </Container>
                     
-                    <UsersDiv>
-                        
-                        {users.map((user) => {
-                            return <UserUi key={user.key} user={user.user} setUserPage={setUserPage} setUserKey={setUserKey} />
-                        })}
-                    </UsersDiv>
-                </UsersWrapper>
+                </UsersWrapper>   
         </>
     )
 }
@@ -120,7 +123,7 @@ function MainUserPage() {
     return (
         <>
             {userPage === 'Users' && <Users setUserPage={setUserPage} setUserKey={setUserKey}/>}
-            {userPage === 'UserInfo' && <UserInfo userKey={userKey}/>}
+            {userPage === 'UserInfo' && <UserInfo userKey={userKey} setUserPage={setUserPage}/>}
         </>
     )
 }
