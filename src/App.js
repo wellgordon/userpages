@@ -16,7 +16,7 @@ function App() {
     <Nav setPage={setCurrPage} />
     {currPage === 'Home' && <Home setPage={setCurrPage}/>}
     {currPage === 'MainUserPage' && <MainUserPage setPage={setCurrPage}/>}
-    {currPage === <UserInfo />  && <UserInfo setPage={setCurrPage}/>}
+    {currPage === 'UserInfo'  && <UserInfo setPage={setCurrPage}/>}
     {currPage === 'About' && <About setPage={setCurrPage}/>}
     <Footer></Footer>
    </>

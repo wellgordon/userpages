@@ -1,16 +1,15 @@
 import styled from 'styled-components'
 
 const NavContainer = styled.div`
-    margin-bottom: 1rem;
-    width: 50vw;
+    display: block;
+    margin: 0 auto;
+    
 `
 const NavList = styled.ul`
-    position: relative;
-    left: 50%;
     list-style: none;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
 `
 
 export const NavButton = styled.li`
@@ -25,17 +24,16 @@ export const NavButton = styled.li`
 
 export default function Nav({setPage}) {
 
-    function handleClick(e) {
-        e.target.innerText === 'Home' ? setPage('Home') : setPage('About')
-    }
-
     return (
        <NavContainer>
         <NavList>
-            <NavButton onClick={handleClick}>
+            <NavButton onClick={() => {setPage('Home')}}>
                 Home
             </NavButton>
-            <NavButton onClick={handleClick}>
+            <NavButton onClick={() => {setPage('MainUserPage')}}>
+                Users
+            </NavButton>
+            <NavButton onClick={() => {setPage('About')}}>
                 About
             </NavButton>    
         </NavList>

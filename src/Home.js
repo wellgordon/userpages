@@ -48,16 +48,6 @@ const fadeIn = keyframes`
     }
 `
 
-// const fadeOut = keyframes`
-//     100% { 
-//         opacity: 1;
-//     }
-
-//     0% { 
-//         opacity: 0;
-//     }
-// `
-
 const Fader = styled.h2`
     text-align: center;
 
@@ -76,7 +66,7 @@ function HomeUI({ content, setCount, count }) {
                     if(count < content.length - 1) {
                         setCount(count => count + 1)        
                     }   
-                }, 5000);              
+                }, 3000);              
             })   
 
     return (
@@ -102,7 +92,6 @@ function Home({ setPage }) {
         'To get started, we will first use a randomuser generator, provided by https://randomuser.io, to find some user profiles',
         'Then, each mini profile will provide a link to a dedicated page for that user',
         'Feel free to pull as many users as you like from the api',
-        'Or, alternatively, use the form below on the next page to create a profile for yourself!',
         'Ready to get started?',
         <Nav onClick={handleClick}>Let's Find Some Users</Nav>,
     ]
